@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Icon, Card, Button, Spin, Alert } from 'antd';
+import { Tabs, Icon, Card, Button, Spin } from 'antd';
 
 import List from './components/list/';
 import { actionCreators } from './store';
@@ -39,6 +39,7 @@ class TopicList extends PureComponent {
     return (
       <Card>
         <Tabs
+          animated={false}
           defaultActiveKey={categories[defaultCategoryIndex].id}
           tabBarExtraContent={publishTopicButton}
           onChange={(activeKey) => {setTopicLoading(true); getTopicList(activeKey)}}
