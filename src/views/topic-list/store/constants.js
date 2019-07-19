@@ -1,0 +1,6 @@
+const CHANGE_TOPIC_LIST = 'topicList/CHANGE_TOPIC_LIST';
+const SET_TOPIC_LOADING = 'topicList/SET_TOPIC_LOADING';
+export default {
+  CHANGE_TOPIC_LIST,
+  SET_TOPIC_LOADING
+}
