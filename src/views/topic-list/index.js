@@ -1,21 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Icon, Card, Button, Spin } from 'antd';
+import { Tabs, Icon, Card, Button } from 'antd';
 
 import List from './components/list/';
+import LoadingSpin from '../../components/loading-spin';
 import { actionCreators } from './store';
 const { TabPane } = Tabs;
-
-const TopicListSpin = () => (
-  <div
-    style={{
-      textAlign: 'center',
-      margin: '100px 0',
-    }}
-  >
-    <Spin tip="Loading..." size="large" />
-  </div>
-)
 
 class TopicList extends PureComponent {
 
@@ -31,8 +21,6 @@ class TopicList extends PureComponent {
 
     categories = categories.toJS();
     topics = topics.toJS();
-
-    console.log(topics);
 
     const publishTopicButton = <Button type="primary">发布话题</Button>
 
@@ -55,7 +43,7 @@ class TopicList extends PureComponent {
                 }
                 key={item.id}
               >
-                { isTopicListLoading ? <TopicListSpin /> : <List topics={topics} /> }
+                { isTopicListLoading ? <LoadingSpin /> : <List topics={topics} /> }
               </TabPane>
             ))
           }
