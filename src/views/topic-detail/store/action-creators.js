@@ -1,10 +1,9 @@
-import { fromJS } from 'immutable';
 import constants from './constants';
 import { get } from '../../../utils/http';
 
 const showTopicDetailAction = topicDetail => ({
   type: constants.SHOW_TOPIC_DETAIL,
-  topicDetail: fromJS(topicDetail),
+  topicDetail,
 })
 
 const getTopicDetailAction = topicId => dispatch => {

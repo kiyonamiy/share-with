@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = ' https://cnodejs.org/api/v1/';
+const BASE_URL = ' https://cnodejs.org/api/v1';
 
 const queryObjToStr = (url,  obj) => {
   const str = Object.keys(obj).reduce((result, key) => {
@@ -20,7 +20,7 @@ const get = (url, params) => {
 
 const post = (url, data) => {
   return new Promise((resovle, reject) => {
-    axios.post(BASE_URL.contat(url), data).then(res => {
+    axios.post(BASE_URL.concat(url), data).then(res => {
       resovle(res.data);
     }).catch(reject);
   })
