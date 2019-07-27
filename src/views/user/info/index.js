@@ -23,7 +23,6 @@ class UserInfo extends PureComponent {
     }
     userInfo = userInfo.toJS();
     topicCollect = topicCollect.toJS();
-    console.log(topicCollect);
     return (
       <UserContainer avatarSrc={userInfo.avatar_url} username={userInfo.loginname} >
         <RecentMessage recentTopics={userInfo.recent_topics} recentReplies={userInfo.recent_replies} topicCollect={topicCollect} />

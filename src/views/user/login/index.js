@@ -27,7 +27,7 @@ class UserLogin extends PureComponent {
           <Button
             type="primary"
             style={{width: 300, marginTop: 15}}
-            onClick={()=>{handleLoginButtonClick(loginInputValue)}}
+            onClick={()=>{handleLoginButtonClick(loginInputValue);}}
           >登录</Button>
         </LoginWrapper>
       </UserContainer>
@@ -38,6 +38,7 @@ class UserLogin extends PureComponent {
 const mapStateToProps = state => ({
   loginInputValue: state.getIn(['user', 'loginInputValue']),
   userInfo: state.getIn(['user', 'userInfo']),
+  errorCode: state.getIn(['user', 'errorCode']),
 });
 
 const mapDispatchToProps = dispatch => ({

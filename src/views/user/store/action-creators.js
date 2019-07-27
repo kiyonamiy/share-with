@@ -1,12 +1,19 @@
 import constants from './constants';
 
+import { message } from 'antd';
 import { get, post } from '../../../utils/http';
 import history from '../../../utils/history';
+import { login } from '../../../utils/user';
 
 const loginInputChangeAction = loginInputValue => ({
   type: constants.LOGIN_INPUT_CHANGE,
-  loginInputValue
+  loginInputValue,
 });
+
+const changeLoginStatusAction = hasLoggedIn => ({
+  type: constants.CHANGE_LOGIN_STATUS,
+  hasLoggedIn,
+})
 
 const checkLoginAction = finalLoginInputValue => dispatch => {
   post('/accesstoken', {
@@ -14,9 +21,13 @@ const checkLoginAction = finalLoginInputValue => dispatch => {
   }).then(res => {
     if(res.success) {
       const userInfo = res;
-      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      login(userInfo);
+      dispatch(changeLoginStatusAction(true));
+      message.success('登录成功');
       history.push('/user/info');
     }
+  }).catch(err => {
+    message.error('AccessToken 错误');
   });
 }
 
@@ -49,4 +60,5 @@ export default {
   checkLoginAction,
   getUserInfoAction,
   getTopicCollectAction,
+  changeLoginStatusAction,
 }

@@ -6,5 +6,5 @@ import { reducer as user } from '../views/user/store';
 export default combineReducers({
   topicList,
   topicDetail,
-  user
+  user,
 });

@@ -5,6 +5,7 @@ const defaultState = fromJS({
   loginInputValue: '',
   userInfo: null,
   topicCollect: [],
+  hasLoggedIn: false,
 });
 
 export default (state=defaultState, action) => {
@@ -15,6 +16,8 @@ export default (state=defaultState, action) => {
       return state.set('userInfo', fromJS(action.userInfo));
     case constants.CHANGE_TOPIC_COLLECT:
       return state.set('topicCollect', fromJS(action.topicCollect));
+    case constants.CHANGE_LOGIN_STATUS:
+      return state.set('hasLoggedIn', action.hasLoggedIn);
     default:
       return state;
   }
