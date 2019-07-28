@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Share With : CNode 社区另一个客户端
 
-## Available Scripts
+## 简介
 
-In the project directory, you can run:
+此项目是对在趣链实习所做的“趣书”项目的总结和扩展，对接了 CNode 主要的 API ，日后还会更新完善细节。
 
-### `npm start`
+CNode API 文档地址：https://cnodejs.org/api
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 技术栈
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- 使用 react-create-app 脚手架创建项目
+- react、redux、react-router 全家桶
+- 使用 redux-thunk 统一异步和同步 action 操作流程
+- 使用 immutable.js 防止数据误修改
 
-### `npm test`
+## 测试
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+测试前，需要一份 CNode 的 AccessToken ，这是 CNode 网站提供的认证 token。
 
-### `npm run build`
+如何获取 AccessToken ？ 用户登录后，在[设置页面](https://cnodejs.org/setting)可以看到自己的 AccessToken，验证使用 /accesstoken 接口，登录后长期保存 accessToken。
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```shell
+git clone https://github.com/514723273/share-with.git
+cd share-with
+npm start
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## 部分界面截图
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 首页
 
-### `npm run eject`
+![share-with-topic-list](https://raw.githubusercontent.com/514723273/.md-Pictures/master/share-with-topic-list.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 话题详情页
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![share-with-topic-detail](https://raw.githubusercontent.com/514723273/.md-Pictures/master/share-with-topic-detail.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 登录页
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![show-with-user-login](https://raw.githubusercontent.com/514723273/.md-Pictures/master/show-with-user-login.png)
 
-## Learn More
+### 用户详情页
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![show-with-user-info](https://raw.githubusercontent.com/514723273/.md-Pictures/master/show-with-user-info.png)
