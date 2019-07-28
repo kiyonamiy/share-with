@@ -18,7 +18,7 @@ CNode API 文档地址：https://cnodejs.org/api
 
 测试前，需要一份 CNode 的 AccessToken ，这是 CNode 网站提供的认证 token。
 
-如何获取 AccessToken ？用户登录后，在[设置页面](https://cnodejs.org/setting)可以看到自己的 AccessToken，验证使用 /accesstoken 接口，登录后长期保存 accessToken。
+如何获取 AccessToken ？用户登录后，在[设置页面](https://cnodejs.org/setting)可以看到自己的 AccessToken，验证使用 `/accesstoken` 接口，登录后长期保存 AccessToken。
 
 ```shell
 git clone https://github.com/514723273/share-with.git
