@@ -15,7 +15,7 @@ import {
 
 import { actionCreators } from '../user/store';
 
-import { getUserName, getUserAvatar, logout } from '../../utils/user';
+import { getUserName, getUserAvatar, logout, hasLoggedIn as hasLoggedInUtil } from '../../utils/user';
 
 const { Header, Content, Footer } = AntdLayout;
 
@@ -34,10 +34,6 @@ const UserCorner = ({changeLoginStatusToFalse}) => (
 
 class Layout extends Component {
 
-  componentDidMount() {
-    logout();   // 第一次页面加载，清除 local storage
-  }
-
   render() {
     const { children, hasLoggedIn, changeLoginStatusToFalse } = this.props;
     return (
@@ -51,7 +47,7 @@ class Layout extends Component {
             style={{float: 'right', lineHeight: '64px'}}
           >
             <Menu.Item key="home"><Link to="/list">首页</Link></Menu.Item>
-            { hasLoggedIn ? <UserCorner changeLoginStatusToFalse={changeLoginStatusToFalse} /> : <Menu.Item key="login"><Link to="/user/login">登录</Link></Menu.Item>}
+            { hasLoggedIn || hasLoggedInUtil() ? <UserCorner changeLoginStatusToFalse={changeLoginStatusToFalse} /> : <Menu.Item key="login"><Link to="/user/login">登录</Link></Menu.Item>}
           </Menu>
         </Header>
         <Content style={{ padding: '0 50px', marginTop: '16px'}}>
