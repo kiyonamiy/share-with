@@ -5,13 +5,18 @@ import RouterConfig from '../config/router';
 import Layout from '../views/layout';
 import store from '../store';
 import history from '../utils/history';
+
+import WsMouseControl from '../components/ws-mouse-control';
+
 function App() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <Layout>
-          <RouterConfig />
-        </Layout>
+        <WsMouseControl>
+          <Layout>
+            <RouterConfig />
+          </Layout>
+        </WsMouseControl>
       </Router>
     </Provider>
   )
