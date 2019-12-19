@@ -3,37 +3,29 @@ import { w3cwebsocket } from 'websocket';
 
 import * as constants from './constants.js';
 import { WsMouseControlPanel, MouseCircle } from './style';
+const updateMouses = (mouses, {id, x, y}, setMouses) => {
+    const newMouses = [];
+    let flag = false;
 
-const mouseMove = (id, x, y, mouses, setMouses, count, setCount) => {
-    // const newMouses = [];
-    // let flag = false;
-    // console.log(1.1, mouses);
-    console.log(1.2, count);
+    for(let mouse of mouses) {
+        if(mouse.id === id) {
+            flag = true;
+            mouse.x = x;
+            mouse.y = y;
+        }
+        newMouses.push(mouse);
+    }
+    if(!flag) {
+        let color = '#' + Array(6).fill().map(idx=>{
+            return parseInt(Math.random() * 15).toString(16); 
+        }).join('');
+       
+        newMouses.push({id, x, y, color});
+    }
 
-
-    // for(let mouse of mouses) {
-    //     if(mouse.id === id) {
-    //         flag = true;
-    //         mouse.x = x;
-    //         mouse.y = y;
-    //     }
-    //     newMouses.push(mouse);
-    // }
-    // if(!flag) {
-    //     newMouses.push({id, x, y});
-    // }
-
-    // console.log(2.1, newMouses);
-    console.log(2.2, count);
-    
-    setCount(count + 1);
-    // setMouses(newMouses);
+    setMouses(newMouses);
 }
 
-const test = (count, setCount) => {
-    setCount(count + 1);
-    console.log(count)
-}
 
 const mouseClick = (panelX, panelY, x, y) => {
     const element = document.elementsFromPoint(panelX + x, panelY + y)[1];
@@ -57,8 +49,10 @@ const clickElement = (ele) => {
 export default function(props) {
     const { children } = props;
 
-    const [ mouses, setMouses ] = useState([{id: -1, x: 2, y: 3}]);
-    const [ count, setCount ] = useState(0);
+    const [ nowMouse, setNowMouse ] = useState({});
+    const [ mouses, setMouses ] = useState([]);
+
+    console.log(mouses);
 
     useEffect(() => {
         const panel = document.getElementById(constants.WS_MOUSE_CONTROL_PANEL);
@@ -70,41 +64,44 @@ export default function(props) {
             console.log('client connect server success!');
         }
 
-        client.onmessage = (messageEvent) => {
-            const mouseData = JSON.parse(messageEvent.data);     // {"id":"3","type":"0","x":"1113","y":"156"}
-            const { id, type, x, y } = mouseData;
-
-            setCount(count + 1);
+        client.onmessage = ({data}) => {
+            const mouseData = JSON.parse(data);     // {"id":"3","type":"0","x":"1113","y":"156"}
+            const { type, x, y } = mouseData;
 
             switch(type) {
                 case constants.MOUSE_MOVE:
-
-                    mouseMove(id, x, y, mouses, setMouses, count, setCount);
+                    setNowMouse(mouseData)
                     break;
                 case constants.MOUSE_CLICK:
-                    mouseClick(panelX, panelY, x, y);
+                    mouseClick(panelX, panelY, x, y)
                     break;
                 default:
                     break;
             }
         }
+
+        return () => {
+            try {
+                client.close()
+            } catch(e) {
+            }
+        }
         
     }, []);
+
+    useEffect(() => {
+        updateMouses(mouses, nowMouse, setMouses)
+    }, [nowMouse])
 
  
     return (
         <WsMouseControlPanel>
             {children}
-            <button onClick={() => {
-                console.log('here')
-                // console.log(count)
-                // setCount(count + 1);
-                test(count, setCount)
-            }}>CLICL</button>
             {
-                mouses.map((item) => (
-                    <MouseCircle x={item.x} y={item.y} key={item.id} />
-                ))
+                mouses.map((item, idx) => {
+        
+                    return <MouseCircle x={item.x} y={item.y} key={item.id} color={item.color}/>
+                })
             }
         </WsMouseControlPanel>
            

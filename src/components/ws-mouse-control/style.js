@@ -20,6 +20,6 @@ export const MouseCircle = styled.div`
     height: 15px;
     width: 15px;
     border-radius: 50%;
-    background: #010101;
+    background: ${props=>props.color};
     z-index: 9999;
 `;
